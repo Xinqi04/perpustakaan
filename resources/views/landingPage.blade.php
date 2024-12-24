@@ -16,7 +16,7 @@
     <!-- Navbar -->
     <header class="top-bar">
         <div class="logo">
-            <img alt="Library Logo" height="50" src="../img/emojione_books.png" width="50" />
+            <img alt="Library Logo" height="50" src="{{ asset('../images/emojione_books.png') }}" width="50" />
             <span>Perpustakaan <br>Online</span>
         </div>
         <nav>
@@ -24,9 +24,19 @@
             <a href="#features">Features</a>
             <a href="#contact-us">Contact Us</a>
         </nav>
-        <div class="user-menu">
-            <a href="/login/login.html" class="login-link">Login</a>
-        </div>             
+        @if (Route::has('login'))
+                                @auth
+                                    <a
+                                        href="{{ url('/dashboard') }}"
+                                    >
+                                        Dashboard
+                                    </a>
+                                @else
+                                <div class="user-menu">
+                                    <a href="{{ route('login') }}" class="login-link">Login</a>
+                                </div>          
+                                @endauth
+                        @endif          
     </header>
 
     <!-- Hero Section -->
