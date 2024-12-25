@@ -51,7 +51,7 @@
                                 </li>
                                 <!-- Wishlist Buku -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/wishlistbuku/wishlistbuku.html">Wishlist Buku</a>
+                                    <a class="nav-link" href="{{ route('wishlist.index') }}">Wishlist Buku</a>
                                 </li>
                                 <!-- Contact Us -->
                                 <li class="nav-item">
