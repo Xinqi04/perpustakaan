@@ -36,5 +36,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin123'), // Gantilah dengan password yang aman
             'role' => 'admin', // Role sebagai admin
         ]);
+        
+        $this->call([
+            BookSeeder::class,
+            GenreSeeder::class,
+            BookGenreSeeder::class,
+        ]);
     }
 }

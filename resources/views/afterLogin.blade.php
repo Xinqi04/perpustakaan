@@ -22,7 +22,7 @@
                 <div class="container-fluid">
                     <!-- Logo dan Teks -->
                     <div class="logo d-flex align-items-center ms-3">
-                        <img alt="Library Logo" height="50" src="../img/emojione_books.png" width="50" class="me-3" />
+                        <img alt="Library Logo" height="50" src="{{ asset('../images/emojione_books.png') }}" width="50" class="me-3" />
                         <span class="fw-bold" style="color: #3b82f6;">Perpustakaan Online</span>
                     </div>
 
@@ -74,11 +74,11 @@
         <!-- Hero Section -->
         <section class="hero-section">
             <div class="bgblue">
-                <img src="/img/Group 239182.png" alt="bgblue">
+                <img src="{{ asset('../images/Group 239182.png') }}" alt="bgblue">
             </div>
             <div class="hero" data-aos="fade-up" data-aos-duration="1000">
                 <div class="text">
-                    <h1>Selamat Datang <br>di <span>Perpustakaan <br> Online</span>!</h1>
+                    <h1>Selamat Datang {{ Auth::user()->name }}<br>di <span>Perpustakaan <br> Online</span>!</h1>
                     <p>Embark on a literary journey like never before with our revolutionary library application!
                         Introducing a seamless experience that transcends traditional boundaries, where you can effortlessly
                         search your favorite books.</p>
@@ -91,6 +91,20 @@
         </section>
 
         <section class="book-section" data-aos="fade-up" data-aos-duration="1000">
+            <div class="filter">
+                <select id="genre" class="form-select" onchange="loadBooks(this.value)">
+                </select>
+            </div>
+                <h2>Buku</h2>
+                <div class="buku" id="katalog">
+                    <div class="books">
+                        <p class="text-muted">Memuat katalog buku...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- <section class="book-section" data-aos="fade-up" data-aos-duration="1000">
             <div class="filter">
                 <select>
                     <option value="genre">Genre Buku </option>
@@ -109,71 +123,8 @@
                 <div class="books">
                     <!-- Repeat book div as necessary -->
                     <div class="book" data-url="/detailbuku/detailbuku.html">
-                        <img alt="Bumi" src="/img/Bumi.png" />
+                        <img alt="Bumi" src="{{ asset('../images/Bumi.png" />
                         <p>Bumi</p>
-                        <p class="author">Tere Liye</p>
-                        <div class="hover-content">
-                            <button class="wishlist">Add to wishlist</button>
-                            <button class="borrow">Add to pinjam buku</button>
-                        </div>
-                    </div>
-                    <div class="book">
-                        <img alt="Bulan" src="/img/Bulan.png" />
-                        <p>Bulan</p>
-                        <p class="author">Tere Liye</p>
-                        <div class="hover-content">
-                            <button class="wishlist">Add to wishlist</button>
-                            <button class="borrow">Add to pinjam buku</button>
-                        </div>
-                    </div>
-                    <div class="book">
-                        <img alt="Matahari" src="/img/Matahari.png" />
-                        <p>Matahari</p>
-                        <p class="author">Tere Liye</p>
-                        <div class="hover-content">
-                            <button class="wishlist">Add to wishlist</button>
-                            <button class="borrow">Add to pinjam buku</button>
-                        </div>
-                    </div>
-                    <div class="book">
-                        <img alt="Bintang" src="/img/Bintang.png" />
-                        <p>Bintang</p>
-                        <p class="author">Tere Liye</p>
-                        <div class="hover-content">
-                            <button class="wishlist">Add to wishlist</button>
-                            <button class="borrow">Add to pinjam buku</button>
-                        </div>
-                    </div>
-                    <div class="book">
-                        <img alt="Ceros dan Batozar" src="/img/Ceros dan Batozar.png" />
-                        <p>Ceros dan Batozar</p>
-                        <p class="author">Tere Liye</p>
-                        <div class="hover-content">
-                            <button class="wishlist">Add to wishlist</button>
-                            <button class="borrow">Add to pinjam buku</button>
-                        </div>
-                    </div>
-                    <div class="book">
-                        <img alt="Komet" src="/img/Komet.png" />
-                        <p>Komet</p>
-                        <p class="author">Tere Liye</p>
-                        <div class="hover-content">
-                            <button class="wishlist">Add to wishlist</button>
-                            <button class="borrow">Add to pinjam buku</button>
-                        </div>
-                    </div>
-                    <div class="book">
-                        <img alt="Komet Minor" src="/img/Komet Minor.png" />
-                        <p>Komet Minor</p>
-                        <p class="author">Tere Liye</p>
-                        <div class="hover-content">
-                            <button class="wishlist">Add to wishlist</button>
-                            <button class="borrow">Add to pinjam buku</button>
-                        </div>
-                    </div>
-                    <div class="book">
-                        <img alt="Selena" src="/img/Selena.png" />
-                        <p>Selena</p>
                         <p class="author">Tere Liye</p>
                         <div class="hover-content">
                             <button class="wishlist">Add to wishlist</button>
@@ -194,23 +145,23 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
         <footer class="footer" id="contact-us" data-aos="fade-up" data-aos-duration="1000">
             <div class="contact-info">
                 <div class="gbrinfo">
-                    <img src="/img/fluent-color_library-20.png" alt="Library Icon" />
+                    <img src="{{ asset('../images/fluent-color_library-20.png') }}" alt="Library Icon" />
                 </div>
                 <div class="phone-info">
-                    <img src="/img/phone.png" alt="Phone Icon" class="phone-icon" />
+                    <img src="{{ asset('../images/phone.png') }}" alt="Phone Icon" class="phone-icon" />
                     <p>+62 888 999 777</p>
                 </div>
                 <div class="email-info">
-                    <img src="/img/email.png" alt="email icon" class="email-icon" />
+                    <img src="{{ asset('../images/email.png') }}" alt="email icon" class="email-icon" />
                     <p>example@email.com</p>
                 </div>
                 <div class="lokasi-info">
-                    <img src="/img/location.png" alt="lokasi icon" class="lokasi-icon" />
+                    <img src="{{ asset('../images/location.png') }}" alt="lokasi icon" class="lokasi-icon" />
                     <p>Jl. Jalan, Kota Bandung, Jawa Barat, Indonesia</p>
                 </div>
             </div>
@@ -229,6 +180,76 @@
             <p>&copy; 2024 Perpustakaan Online. All rights reserved.</p>
         </div>
     </body>
+
+    <script>
+        AOS.init();
+    
+        async function loadBooks(genre = null) {
+            try {
+                const url = genre ? `/books?genre=${genre}` : '/books';
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Gagal memuat data buku');
+                }
+                const books = await response.json();
+                const katalogContent = document.getElementById('katalog');
+                katalogContent.innerHTML = '';
+                if (books.length === 0) {
+                    katalogContent.innerHTML = '<p class="text-muted">Tidak ada buku dalam genre ini.</p>';
+                    return;
+                }
+                books.forEach(book => {
+    const bookCard = document.createElement('div');
+    bookCard.classList.add('col-md-4', 'mb-4');
+    bookCard.innerHTML = `
+        <div class="book">
+            <a href="/books/${book.id}" style="text-decoration: none; color: inherit;">
+                <img src="{{ asset('../images/Bintang.png') }}" class="card-img-top" alt="${book.title}">
+                <div class="card-body">
+                    <h5 class="card-title">${book.title}</h5>
+                    <p class="card-text">${book.author}</p>
+                </div>
+            </a>
+        </div>
+    `;
+    katalogContent.appendChild(bookCard);
+});
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('katalog').innerHTML = '<p class="text-danger">Gagal memuat katalog buku.</p>';
+            }
+        }
+    
+        // Initial load of books
+        loadBooks();
+    </script>
+
+    <script>
+        async function loadGenres() {
+            const response = await fetch('/api/genres');
+            const genres = await response.json();
+
+            const genreSelect = document.querySelector('.filter select');
+            genreSelect.innerHTML = '<option value="">Semua Genre</option>'; // Tambahkan opsi default
+
+            genres.forEach((genre) => {
+                const option = document.createElement('option');
+                option.value = genre.name_genre;
+                option.textContent = genre.name_genre;
+                genreSelect.appendChild(option);
+            });
+        }
+
+        // Muat genre saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGenres();
+        });
+    </script>
+
+    
+
+    
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6aF0d94RtvfUAN5z7w4VZKqD3z0D+HhV8U26pXceO2dN" crossorigin="anonymous"></script>
