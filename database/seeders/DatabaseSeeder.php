@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             GenreSeeder::class,
             BookGenreSeeder::class,
             WishlistSeeder::class,
+            LoanSeeder::class,
         ]);
     }
 }
