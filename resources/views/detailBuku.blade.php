@@ -114,8 +114,14 @@
                 </p>
             </div> --}}
             <div class="pinjam">
-                <a href="/pinjambuku/pinjambuku.html">
-                    <button>Pinjam Buku</button>
+                {{-- <form action="{{ route('loans.create') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="book_id" value="{{ $book->id }}">
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                    <button type="button">Pinjam Buku</button>
+                </form> --}}
+                <a href="{{ route('loans.create', ['user_id' => auth()->user()->id, 'book_id' => $book->id]) }}">
+                    <button type="button">Pinjam Buku</button>
                 </a>
             </div>
         </div>
