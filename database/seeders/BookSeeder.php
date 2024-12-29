@@ -9,14 +9,14 @@ class BookSeeder extends Seeder
 {
     public function run()
     {
-        Book::create([
+         Book::create([
             'title' => 'The Great Gatsby',
             'author' => 'F. Scott Fitzgerald',
             'published_year' => 1925,
             'publisher' => 'Charles Scribner\'s Sons',
             'available_copies' => 10,
             'total_copies' => 50,
-            'synopsis' => 'A novel about the American dream set in the Roaring Twenties.',
+            'synopsis' => 'The Great Gatsby is a compelling tale of the American dream, ambition, and betrayal, set during the Jazz Age in the 1920s. The story revolves around Jay Gatsby, a mysterious and wealthy man who throws extravagant parties in his pursuit of the unattainable Daisy Buchanan. Through the eyes of narrator Nick Carraway, the novel delves into themes of love, greed, and the disillusionment of the American dream. The narrative paints a vivid picture of a world teeming with opulence and desperation, showcasing the inevitable consequences of unchecked ambition and the fragility of human connections.',
             'price' => 150000,
             'book_image' => 'great_gatsby.jpg',
         ]);

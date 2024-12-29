@@ -1,6 +1,6 @@
 /* Global Styling */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -19,9 +19,9 @@ body {
 }
 
 .hero-section .bgblue img {
-    width: 110%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; /* Membuat gambar mengisi lebar kontainer */
+    height: auto; /* Menjaga aspek rasio gambar tetap terjaga */
+    object-fit: cover; /* Pastikan gambar tetap terisi area tanpa terdistorsi */
 }
 
 /* Top Bar (Header) */
@@ -67,7 +67,7 @@ body {
     padding: 10px 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    color: #5533FF;
+    color: #5533ff;
 }
 
 /* Main Content Container */
@@ -79,18 +79,26 @@ body {
 }
 
 .sinopsis-buku {
-    margin-left: 100px;
+    display: grid;
+    grid-template-columns: 1fr; /* Hanya satu kolom untuk desktop */
+    grid-template-rows: auto 1fr; /* Atur gambar dan sinopsis untuk berada di baris yang berbeda */
+    gap: 20px; /* Spasi antar elemen */
 }
 
-.cover img {
-    height: 500px;
+.container img {
+    width: 200px;
+    height: 300px; /* Tinggi tetap untuk gambar */
+    object-fit: cover; /* Menjaga proporsi gambar */
+    display: block; /* Menghindari margin bawah default dari elemen inline-block */
+    margin: 10px;
 }
 
 .judul {
     padding-bottom: 30px;
 }
 
-.judul p, h2 {
+.judul p,
+h2 {
     margin: 5px;
 }
 
@@ -113,7 +121,8 @@ body {
     margin-bottom: 30px;
 }
 
-.deskripsi h3, p {
+.deskripsi h3,
+p {
     margin: 7px;
 }
 
@@ -121,7 +130,8 @@ body {
     margin-bottom: 30px;
 }
 
-.sinopsis h3, p {
+.sinopsis h3,
+p {
     margin: 7px;
 }
 
@@ -148,8 +158,8 @@ body {
     }
 
     .container {
-        padding: 50px;
-        gap: 15px;
+        padding: 100px;
+        gap: 20px;
     }
 
     .sinopsis-buku {
@@ -157,7 +167,8 @@ body {
     }
 
     .cover img {
-        height: 400px;
+        max-width: 600px; /* Tetap menjaga batas maksimal lebar gambar */
+        height: auto; /* Menjaga agar tinggi gambar proporsional */
     }
 
     .judul h2 {
@@ -229,8 +240,6 @@ body {
     }
 }
 
-
-
 .footer {
     display: flex;
     /* justify-content: space-between; */
@@ -249,15 +258,15 @@ body {
     padding-right: 150px;
     border-right: 1px solid #000;
 }
-.gbrinfo{
+.gbrinfo {
     width: 100px;
     width: 100px;
     padding-bottom: 50px;
 }
 .phone-info {
     display: flex;
-    align-items: center;  /* Menyusun gambar dan teks sejajar secara vertikal */
-    gap: 10px;  /* Menambahkan jarak antara gambar dan teks */
+    align-items: center; /* Menyusun gambar dan teks sejajar secara vertikal */
+    gap: 10px; /* Menambahkan jarak antara gambar dan teks */
 }
 
 .phone-icon {
@@ -267,8 +276,8 @@ body {
 
 .email-info {
     display: flex;
-    align-items: center;  /* Menyusun gambar dan teks sejajar secara vertikal */
-    gap: 10px;  /* Menambahkan jarak antara gambar dan teks */
+    align-items: center; /* Menyusun gambar dan teks sejajar secara vertikal */
+    gap: 10px; /* Menambahkan jarak antara gambar dan teks */
 }
 
 .email-icon {
@@ -278,15 +287,14 @@ body {
 
 .lokasi-info {
     display: flex;
-    align-items: center;  /* Menyusun gambar dan teks sejajar secara vertikal */
-    gap: 10px;  /* Menambahkan jarak antara gambar dan teks */
+    align-items: center; /* Menyusun gambar dan teks sejajar secara vertikal */
+    gap: 10px; /* Menambahkan jarak antara gambar dan teks */
 }
 
 .lokasi-icon {
-    width: 20px; 
+    width: 20px;
     height: 20px;
 }
-
 
 /* form */
 .contact-form {
@@ -297,7 +305,7 @@ body {
 
 .contact-form h2 {
     font-size: 30px;
-    color: #0000FF;
+    color: #0000ff;
 }
 
 .contact-form p {
@@ -318,7 +326,7 @@ body {
 
 .contact-form button {
     padding: 10px 5px; /* Mengurangi padding untuk ukuran lebih kecil */
-    background-color: #3E3BEE;
+    background-color: #3e3bee;
     color: white;
     border: none;
     border-radius: 50px; /* Membuat tombol berbentuk oval */
@@ -326,7 +334,7 @@ body {
     cursor: pointer;
     margin-top: 10px;
     width: auto; /* Lebar disesuaikan dengan panjang teks */
-    max-width: 150px;/* Mengatur lebar tombol sesuai isi teks */
+    max-width: 150px; /* Mengatur lebar tombol sesuai isi teks */
     text-align: center;
 }
 
@@ -341,7 +349,7 @@ body {
 }
 
 .copyright-info {
-    background-color: #4475F2; /* Warna biru seperti pada gambar */
+    background-color: #4475f2; /* Warna biru seperti pada gambar */
     color: white; /* Warna teks putih */
     display: flex;
     justify-content: center; /* Membuat konten terpisah */
@@ -358,7 +366,6 @@ body {
     font-size: 14px;
     color: #00bfff; /* Warna biru muda untuk ukuran */
 }
-
 
 @media (max-width: 768px) {
     .hero {
@@ -448,7 +455,7 @@ body {
 /* Untuk layar sangat kecil (max-width: 480px) */
 @media (max-width: 480px) {
     .hero-section .hero h1 {
-        font-size: 28px;  /* Mengurangi ukuran font h1 */
+        font-size: 28px; /* Mengurangi ukuran font h1 */
     }
     .hero-section .hero p {
         font-size: 14px;
@@ -484,4 +491,3 @@ body {
         font-size: 14px;
     }
 }
-

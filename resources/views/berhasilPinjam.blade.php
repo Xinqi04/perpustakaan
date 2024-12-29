@@ -69,11 +69,12 @@
                 <path d="M9 12l2 2 4-4"></path>
             </svg>
         </div>
-        <h1>Form Pinjam Buku Berhasil Terkirim!</h1>
-        <p><strong>It is a long established fact that a reader will be distracted by the readable.</strong></p>
-        <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
-        <p>The standard chunk of Lorem Ipsum used since the 1500s</p>
+        <h1>Form Peminjaman Buku Berhasil Terkirim!</h1>
+        <p><strong>Terima kasih! Peminjaman buku Anda akan segera kami proses.</strong></p>
+        <p>Formulir peminjaman buku Anda telah berhasil dikirim. Silakan tunggu konfirmasi lebih lanjut mengenai status peminjaman Anda.</p>
+        <p>Jika ada pertanyaan atau perubahan, Anda bisa menghubungi kami melalui halaman utama.</p>
         <a href="{{ url('/dashboard') }}">Kembali ke Halaman Utama</a>
+
     </div>
 </body>
 </html>

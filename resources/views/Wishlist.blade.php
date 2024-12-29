@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/wishlistbuku.css', 'resources/js/wishlistbuku.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/buku2.css', 'resources/js/wishlistbuku.js'])
 </head>
 
 <body>
@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <!-- Logo dan Teks -->
                 <div class="logo d-flex align-items-center ms-3">
-                    <img alt="Library Logo" height="50" src="../img/emojione_books.png" width="50" class="me-3" />
+                    <img alt="Library Logo" height="50" src="{{ asset('../images/emojione_books.png') }}" width="50" class="me-3" />
                     <span class="fw-bold" style="color: #3b82f6;">Perpustakaan Online</span>
                 </div>
 
@@ -43,24 +43,28 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <!-- Katalog Buku -->
                             <li class="nav-item">
-                                <a class="nav-link" href="#katalog">Katalog Buku</a>
-                            </li>
-                            <!-- Pinjam Buku -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="/pinjambuku/pinjambuku.html">Pinjam Buku</a>
-                            </li>
-                            <!-- Wishlist Buku -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="/wishlistbuku/wishlistbuku.html">Wishlist Buku</a>
-                            </li>
-                            <!-- Contact Us -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="#contact-us">Contact Us</a>
+                                <a class="nav-link" href="{{ route('dashboard') }}?verified=1">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/landingpage/landingpage.html">Logout</a>
+                                <a class="nav-link" href="{{ url('/profile') }}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/news') }}">News</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/katalogBuku') }}">Katalog Buku</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('wishlist.index') }}">Wishlist Buku</a>
+                            </li>
+                            <li class="nav-item">
+                                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="nav-link" style="background: none; border: none; color: inherit; text-decoration: none;">
+                                        Logout
+                                    </button>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -69,91 +73,41 @@
         </nav>
     </header>
 
-    <section class="book-section">
-        <div class="filter">
-            <select id="genre-filter">
-                <option value="">Semua Genre</option>
-                <option value="Fiksi Ilmiah">Fiksi Ilmiah</option>
-                <option value="Fantasi">Fantasi</option>
-                <option value="Romansa">Romansa</option>
-                <option value="Misteri">Misteri</option>
-                <option value="Biografi">Biografi</option>
-                <option value="Sejarah">Sejarah</option>
-                <option value="Sains">Sains</option>
-            </select>
-            <h2>Buku Wishlist</h2>
-        </div>
-        
-        <div class="buku" id="katalog">
-            <div class="books">
+    <div class="content" style="padding-top: 80px">
+        <p style="text-align: center; font-size: 40px; font-weight: bold;">Wishlist Buku</p>
+    
+        <!-- Pengecekan jika wishlist kosong -->
+        @if ($booksInWishlist->isEmpty())
+            <p style="text-align: center; font-size: 18px; color: #888;">Belum ada wishlist buku</p>
+        @else
+            <!-- Book Cards -->
+            <div id="book-cards" class="row">
                 @foreach ($booksInWishlist as $book)
-                    <div class="book" data-genre="{{ $book->genre }}">
-                        <img alt="{{ $book->title }}" src="{{ asset('img/'.$book->image) }}" />
-                        <p>{{ $book->title }}</p>
-                        <p class="author">{{ $book->author }}</p>
-                        <div class="hover-content">
-                            <button class="borrow">Add to pinjam buku</button>
+                <div class="col-md-2 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="{{ asset('storage/' . $book->book_image) }}" class="card-img-top" alt="{{ $book->title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $book->title }}</h5>
+                            <p class="card-text"><strong>Penulis:</strong> {{ $book->author }}</p>
+                            <p class="card-text"><strong>Kategori:</strong> 
+                                @foreach ($book->genres as $genre)
+                                    {{ $genre->name_genre }}{{ !$loop->last ? ', ' : '' }}
+                                @endforeach
+                            </p>
+                            <!-- Tombol Lepas Wishlist -->
+                            <div class="pinjam">
+                                <a href="{{ route('loans.create', ['user_id' => auth()->user()->id, 'book_id' => $book->id]) }}">
+                                    <button type="button">Pinjam Buku</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
-        </div>
-    </section>
-
-    <footer class="footer" id="contact-us">
-        <div class="contact-info">
-            <div class="gbrinfo">
-                <img src="/img/fluent-color_library-20.png" alt="Library Icon" />
-            </div>
-            <div class="phone-info">
-                <img src="/img/phone.png" alt="Phone Icon" class="phone-icon" />
-                <p>+62 888 999 777</p>
-            </div>
-            <div class="email-info">
-                <img src="/img/email.png" alt="email icon" class="email-icon" />
-                <p>example@email.com</p>
-            </div>
-            <div class="lokasi-info">
-                <img src="/img/location.png" alt="lokasi icon" class="lokasi-icon" />
-                <p>Jl. Jalan, Kota Bandung, Jawa Barat, Indonesia</p>
-            </div>
-        </div>
-
-        <div class="contact-form">
-            <h2>Perpustakaan Online</h2>
-            <p>Any question or remarks? Let us know!</p>
-            <input type="text" placeholder="Enter your name" />
-            <input type="email" placeholder="Enter your email" />
-            <textarea placeholder="Type your message here"></textarea>
-            <button>Submit</button>
-        </div>
-    </footer>
-
-    <div class="copyright-info">
-        <p>&copy; 2024 Perpustakaan Online. All rights reserved.</p>
+        @endif
     </div>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-    <script src="wishlistbuku.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Sorting berdasarkan genre
-        document.getElementById('genre-filter').addEventListener('change', function() {
-            var selectedGenre = this.value;
-            var books = document.querySelectorAll('.book');
-
-            books.forEach(function(book) {
-                var genre = book.getAttribute('data-genre');
-                if (selectedGenre && genre !== selectedGenre) {
-                    book.style.display = 'none';
-                } else {
-                    book.style.display = 'block';
-                }
-            });
-        });
-    </script>
+    
 </body>
 
 </html>

@@ -16,7 +16,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('profileUser', [
             'user' => $request->user(),
         ]);
     }
@@ -26,16 +26,24 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        // Ambil user yang sedang login
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        // Perbarui atribut yang diperbolehkan
+        $user->fill([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'address' => $request->input('address'),
+            'phone_number' => $request->input('phone_number'),
+        ]);
 
-        $request->user()->save();
+        // Simpan perubahan ke database
+        $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // Redirect ke halaman edit profil dengan pesan sukses
+        return Redirect::route('profile.edit')->with('status', 'Profile updated successfully!');
     }
+
 
     /**
      * Delete the user's account.

@@ -7,50 +7,11 @@ body {
     overflow-x: hidden;
 }
 
+
 /* Hero Section Styling */
 /* .hero-section {
     padding: 30px 100px 100px;
 } */
-.pinjam {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.pinjam a {
-    text-decoration: none;
-    width: 100%;
-}
-
-.pinjam button {
-    background-color: #3b82f6; /* Warna biru */
-    color: #ffffff; /* Teks putih */
-    font-size: 14px; /* Ukuran teks */
-    font-weight: 600; /* Ketebalan teks */
-    padding: 10px 20px; /* Ruang dalam */
-    border: none; /* Tanpa border */
-    border-radius: 5px; /* Sudut membulat */
-    cursor: pointer; /* Pointer pada hover */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan halus */
-    transition: all 0.3s ease; /* Efek animasi */
-    width: 100%;
-    text-align: center;
-}
-
-/* Hover Effect */
-.pinjam button:hover {
-    background-color: #2563eb; /* Warna biru lebih gelap */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih tegas */
-    transform: translateY(-2px); /* Sedikit naik */
-}
-
-/* Fokus untuk Aksesibilitas */
-.pinjam button:focus {
-    outline: 2px solid #2563eb; /* Outline biru saat fokus */
-    outline-offset: 2px;
-}
-
-
 
 .hero-section .bgblue {
     position: absolute;
@@ -115,10 +76,84 @@ body {
     color: #5533FF;
 }
 
+/* Hero Content */
+.hero-section .hero {
+    font-family: 'Plus Jakarta sans';
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-section .hero .text {
+    max-width: 50%;
+}
+
+.hero-section .hero h1 {
+    font-size: 48px;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.hero-section .hero h1 span {
+    color: #3b82f6;
+    text-decoration: underline;
+}
+
+.hero-section .hero p {
+    font-size: 18px;
+    color: #666;
+    margin: 20px 0;
+}
+
+.hero-section .hero .search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.hero-section .hero .search-bar input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    flex: 1;
+}
+
+.hero-section .hero .search-bar {
+    display: flex;
+    align-items: center;
+    border-radius: 50px; /* Membuat search bar lebih oval */
+    overflow: hidden;
+}
+
+.hero-section .hero .search-bar input {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-radius: 50px 0 0 50px; /* Menyambungkan input dengan tombol */
+    flex: 1;
+    font-size: 16px;
+}
+
+.hero-section .hero .search-bar button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 0 50px 50px 0; /* Membuat sudut tombol lebih oval */
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.hero-section .hero .search-bar input:focus, 
+.hero-section .hero .search-bar button:focus {
+    outline: none;
+}
+
+
 /* Styling untuk section buku */
 /* Styling untuk section buku */
 .book-section {
-    padding: 100px;
+    padding: 20px;
     background-color: #f7f7f7;
 }
 
@@ -283,7 +318,6 @@ button.borrow:hover {
         width: 120px;
     }
 }
-
 
 
 

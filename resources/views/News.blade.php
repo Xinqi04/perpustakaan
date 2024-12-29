@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Perpustakaan Online</title>
-    @laravelPWA
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
@@ -13,12 +12,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/detailbuku.css', 'resources/js/detailbuku.js'])
 </head>
 
 <body>
-
-    <!-- Navbar -->
     <header>
         <nav class="navbar bg-body-tertiary fixed-top">
             <div class="container-fluid">
@@ -73,95 +69,38 @@
         </nav>
     </header>
 
-    <section class="container" data-aos="fade-in">
-    <img src="{{ asset('../images/Bumi.png') }}" alt="Bumi" data-aos="fade-right">
-    <div class="sinopsis-buku">
-        <div class="judul">
-            <p>{{ Auth::user()->name }}</p>
-            <p>{{ $book->author }}</p>
-            <h2>{{ $book->title }}</h2>
-            <p>Published Year: {{ $book->published_year }}</p>
-            <p>Publisher: {{ $book->publisher }}</p>
-            <form action="{{ route('wishlist.store') }}" method="POST">
-                @csrf
-                <input type="hidden" name="book_id" value="{{ $book->id }}">
-                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                <button type="submit" class="wishlist">Add to Wishlist</button>
-            </form>
-        </div>
-        <div class="deskripsi">
-            <h3>Sinopsis</h3>
-            <p>{{ $book->synopsis }}</p>
-        </div>
-        <div class="pinjam">
-            <a href="{{ route('loans.create', ['user_id' => auth()->user()->id, 'book_id' => $book->id]) }}">
-                <button type="button">Pinjam Buku</button>
-            </a>
-        </div>
-    </div>
-</section>
-
-
-    <footer class="footer" id="contact-us">
-        <div class="contact-info">
-            <div class="gbrinfo">
-                <img src="/img/fluent-color_library-20.png" alt="Library Icon" />
-            </div>
-            <div class="phone-info">
-                <img src="/img/phone.png" alt="Phone Icon" class="phone-icon" />
-                <p>+62 888 999 777</p>
-            </div>
-            <div class="email-info">
-                <img src="/img/email.png" alt="email icon" class="email-icon" />
-                <p>example@email.com</p>
-            </div>
-            <div class="lokasi-info">
-                <img src="/img/location.png" alt="lokasi icon" class="lokasi-icon" />
-                <p>Jl. Jalan, Kota Bandung, Jawa Barat, Indonesia</p>
-            </div>
-        </div>
-
-        <div class="contact-form">
-            <h2>Perpustakaan Online</h2>
-            <p>Any question or remarks? Let us know!</p>
-            <input type="text" placeholder="Enter your name" />
-            <input type="email" placeholder="Enter your email" />
-            <textarea placeholder="Type your message here"></textarea>
-            <button>Submit</button>
-        </div>
-    </footer>
-
-    <div class="copyright-info">
-        <p>&copy; 2024 Perpustakaan Online. All rights reserved.</p>
+    <div class="jumbotron text-center bg-primary text-white py-4">
+        <h1>Science News</h1>
     </div>
 
-    <script src="detailbuku.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="container-fluid">
+        @if(isset($newsData['articles']) && is_array($newsData['articles']))
+            @foreach ($newsData['articles'] as $news)
+                <div class="row NewsGrid my-4">
+                    <div class="col-md-3">
+                        <img src="{{ $news['urlToImage'] ?? 'placeholder.jpg' }}" alt="News thumbnail" class="rounded img-fluid">
+                    </div>
+                    <div class="col-md-9">
+                        <h2>Title: {{ $news['title'] ?? 'No Title' }}</h2>
+                        <h5>Description: {{ $news['description'] ?? 'No Description' }}</h5>
+                        <p>Content: {{ $news['content'] ?? 'No Content' }}</p>
+                        <h6>Author: {{ $news['author'] ?? 'Unknown' }}</h6>
+                        <h6>Published: {{ $news['publishedAt'] ?? 'No Date' }}</h6>
+                        <a href="{{ $news['url'] ?? '#' }}" class="btn btn-primary" target="_blank">Read More</a>
+                    </div>
+                </div>
+                <hr>
+            @endforeach
+        @else
+            <p>No news data available.</p>
+        @endif
+    </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        @if(session('success'))
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: "{{ session('success') }}",
-            });
-        @endif
-    
-        @if(session('error'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: "{{ session('error') }}",
-            });
-        @endif
-    </script>
-
-<script src="{{ asset('resources/js/detailbuku.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

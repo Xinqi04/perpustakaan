@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -17,7 +17,7 @@ body {
     position: absolute;
     top: 0;
     left: 600px;
-    right: 0;
+    right: -70px;
     bottom: 0;
     z-index: -1; /* Ensures the image stays behind other content */
 }
@@ -34,7 +34,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -42,7 +42,7 @@ body {
 
 /* Hero Content */
 .hero-section .hero {
-    font-family: 'Plus Jakarta sans';
+    font-family: "Plus Jakarta sans";
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -108,11 +108,10 @@ body {
     font-size: 16px;
 }
 
-.hero-section .hero .search-bar input:focus, 
+.hero-section .hero .search-bar input:focus,
 .hero-section .hero .search-bar button:focus {
     outline: none;
 }
-
 
 /* Styling untuk section buku */
 /* Styling untuk section buku */
@@ -132,7 +131,7 @@ body {
 .filter select {
     padding: 8px;
     font-size: 14px;
-    color: #5533FF;
+    color: #5533ff;
 }
 
 .filter h2 {
@@ -143,6 +142,7 @@ body {
 
 /* Membuat jarak antara filter dan daftar buku */
 /* Kontainer utama buku */
+/* Styling untuk katalog buku */
 .buku {
     margin: 20px auto;
     display: flex;
@@ -154,17 +154,87 @@ body {
     padding: 10px;
 }
 
-/* Kontainer grid buku */
+/* Styling untuk grid buku */
 .books {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(150px, 1fr)
+    ); /* Menyesuaikan kolom sesuai ukuran layar */
     gap: 20px;
     width: 100%;
     justify-items: center;
 }
 
+/* Styling untuk card buku */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Memastikan card mengambil seluruh tinggi kolom */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan card */
+    border-radius: 10px; /* Sudut melengkung */
+    background-color: #fff; /* Warna latar belakang card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efek transisi */
+    text-align: center;
+    width: 100%; /* Membuat card mengambil lebar penuh di dalam kolom */
+}
+
+/* Efek hover pada card */
+.card:hover {
+    transform: translateY(-5px); /* Card bergerak sedikit ke atas */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Menambah bayangan saat hover */
+}
+
+/* Gambar dalam card */
+.card-img-top {
+    align-self: center;
+    width: 100%; /* Mengatur lebar gambar */
+    height: 200px; /* Menyesuaikan tinggi gambar */
+    object-fit: cover; /* Menyesuaikan gambar agar tidak terdistorsi */
+}
+
+/* Judul dalam card */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Teks penulis dalam card */
+.card-text {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Tombol Show More */
+.show-more {
+    display: flex;
+    justify-content: center; /* Menyusun tombol ke tengah secara horizontal */
+    align-items: center; /* Menyusun tombol ke tengah secara vertikal */
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.show-more a {
+    display: inline-block; /* Supaya mirip tombol */
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.show-more a:hover {
+    background-color: #2563eb;
+}
+
 /* Kartu buku */
 .book {
+    justify-content: center; /* Menyusun elemen secara horizontal di tengah */
+    align-items: center; /* Menyusun elemen secara vertikal di tengah */
     position: relative;
     width: 150px;
     overflow: hidden;
@@ -226,11 +296,9 @@ body {
     opacity: 1;
 }
 
-
-
 /* Tombol wishlist dan pinjam */
 button.wishlist,
-button.borrow{
+button.borrow {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -308,15 +376,15 @@ button.borrow:hover {
     padding-right: 150px;
     border-right: 1px solid #000;
 }
-.gbrinfo{
+.gbrinfo {
     width: 100px;
     width: 100px;
     padding-bottom: 50px;
 }
 .phone-info {
     display: flex;
-    align-items: center;  /* Menyusun gambar dan teks sejajar secara vertikal */
-    gap: 10px;  /* Menambahkan jarak antara gambar dan teks */
+    align-items: center; /* Menyusun gambar dan teks sejajar secara vertikal */
+    gap: 10px; /* Menambahkan jarak antara gambar dan teks */
 }
 
 .phone-icon {
@@ -326,8 +394,8 @@ button.borrow:hover {
 
 .email-info {
     display: flex;
-    align-items: center;  /* Menyusun gambar dan teks sejajar secara vertikal */
-    gap: 10px;  /* Menambahkan jarak antara gambar dan teks */
+    align-items: center; /* Menyusun gambar dan teks sejajar secara vertikal */
+    gap: 10px; /* Menambahkan jarak antara gambar dan teks */
 }
 
 .email-icon {
@@ -337,12 +405,12 @@ button.borrow:hover {
 
 .lokasi-info {
     display: flex;
-    align-items: center;  /* Menyusun gambar dan teks sejajar secara vertikal */
-    gap: 10px;  /* Menambahkan jarak antara gambar dan teks */
+    align-items: center; /* Menyusun gambar dan teks sejajar secara vertikal */
+    gap: 10px; /* Menambahkan jarak antara gambar dan teks */
 }
 
 .lokasi-icon {
-    width: 20px; 
+    width: 20px;
     height: 20px;
 }
 
@@ -366,7 +434,7 @@ textarea {
     padding: 10px 20px; /* Ruang dalam */
     font-size: 16px; /* Ukuran font */
     color: #fff; /* Warna teks */
-    background-color: #007BFF; /* Warna biru */
+    background-color: #007bff; /* Warna biru */
     border: none; /* Tanpa border */
     border-radius: 5px; /* Sudut membulat */
     cursor: pointer; /* Ubah kursor jadi pointer */
@@ -386,7 +454,7 @@ textarea {
 
 .contact-form h2 {
     font-size: 30px;
-    color: #0000FF;
+    color: #0000ff;
 }
 
 .contact-form p {
@@ -407,7 +475,7 @@ textarea {
 
 .contact-form button {
     padding: 10px 5px; /* Mengurangi padding untuk ukuran lebih kecil */
-    background-color: #3E3BEE;
+    background-color: #3e3bee;
     color: white;
     border: none;
     border-radius: 50px; /* Membuat tombol berbentuk oval */
@@ -415,7 +483,7 @@ textarea {
     cursor: pointer;
     margin-top: 10px;
     width: auto; /* Lebar disesuaikan dengan panjang teks */
-    max-width: 150px;/* Mengatur lebar tombol sesuai isi teks */
+    max-width: 150px; /* Mengatur lebar tombol sesuai isi teks */
     text-align: center;
 }
 
@@ -430,7 +498,7 @@ textarea {
 }
 
 .copyright-info {
-    background-color: #4475F2; /* Warna biru seperti pada gambar */
+    background-color: #4475f2; /* Warna biru seperti pada gambar */
     color: white; /* Warna teks putih */
     display: flex;
     justify-content: center; /* Membuat konten terpisah */
@@ -447,8 +515,6 @@ textarea {
     font-size: 14px;
     color: #00bfff; /* Warna biru muda untuk ukuran */
 }
-
-
 
 @media (max-width: 768px) {
     .hero-section {
@@ -473,5 +539,8 @@ textarea {
         align-items: center;
         text-align: center;
         gap: 20px;
+    }
+    .card-img-top {
+        height: 180px; /* Menyesuaikan tinggi gambar di layar kecil */
     }
 }
