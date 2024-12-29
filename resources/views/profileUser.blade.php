@@ -32,7 +32,8 @@
     <div class="container">
         <header>
             <div class="header-left">
-                <h1>Welcome, {{ Auth::user()->name }}</h1>
+                <a href="{{ route('dashboard') }}?verified=1"> Welcome, </a>
+                <h1> {{ Auth::user()->name }}</h1>
             </div>
             <div class="header-right">
                 <p>Tue, 07 June 2022</p>
@@ -43,7 +44,7 @@
         <main>
             <div class="profile">
                 <div class="profile-header">
-                    <img src="https://via.placeholder.com/100" alt="User" class="avatar">
+                    <img src="{{ asset('../images/pp.jpg') }}" alt="User" class="avatar">
                     <div class="profile-info">
                         <h2 id="profileName">{{ Auth::user()->name }}</h2>
                         <p id="profileEmail">{{ Auth::user()->email }}</p>
@@ -72,6 +73,12 @@
             </div>
         </main>
     </div>
+    <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        Logout
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 
     <script src="profil.js"></script>
     <script>
@@ -114,10 +121,14 @@
     });
 
     </script>
-
+    <script>
+        document.getElementById("dashboard").addEventListener("click", function () {
+            window.location.href = "/user/transactions";
+        });
+    </script>
     <script>
         document.getElementById("groupChat").addEventListener("click", function () {
-            window.location.href = "/riwayat";
+            window.location.href = "/profile";
         });
     </script>
 </body>

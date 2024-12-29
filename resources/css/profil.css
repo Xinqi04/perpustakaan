@@ -4,10 +4,29 @@
     box-sizing: border-box;
 }
 
+.profile .profile-header img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+
 body {
     font-family: Arial, sans-serif;
     height: 100vh;
     display: flex;
+}
+.logout-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff4d4d;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .profile {
