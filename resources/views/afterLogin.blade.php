@@ -139,7 +139,7 @@
                 <p>Any question or remarks? Let us know!</p>
                 <form action="https://api.web3forms.com/submit" method="POST">
                     <!-- Replace with your Access Key -->
-                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                    <input type="hidden" name="access_key" value="6c1f757d-a48d-4694-a6d9-c10caddcc742">
                     
                     <!-- Form Inputs. Each input must have a name="" attribute -->
                     <input type="text" name="name" placeholder="Enter your name" required>
@@ -152,6 +152,15 @@
                     <!-- Submit Button -->
                     <button type="submit" class="submit-button">Submit</button>
                 </form>
+
+                {{-- <div class="contact-form">
+                    <h2>Perpustakaan Online</h2>
+                    <p>Any question or remarks? Let us know!</p>
+                    <input type="text" placeholder="Enter your name" />
+                    <input type="email" placeholder="Enter your email" />
+                    <textarea placeholder="Type your message here"></textarea>
+                    <button>Submit</button>
+                </div> --}}
             </div>
             
         </footer>
