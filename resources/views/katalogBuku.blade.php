@@ -109,7 +109,7 @@
             @endforeach
         </div>
     </div>
-
+    
     <script>
         document.getElementById('search-input').addEventListener('input', function () {
             const query = this.value;

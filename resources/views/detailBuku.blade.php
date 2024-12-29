@@ -101,34 +101,47 @@
 </section>
 
 
-    <footer class="footer" id="contact-us">
-        <div class="contact-info">
-            <div class="gbrinfo">
-                <img src="/img/fluent-color_library-20.png" alt="Library Icon" />
-            </div>
-            <div class="phone-info">
-                <img src="/img/phone.png" alt="Phone Icon" class="phone-icon" />
-                <p>+62 888 999 777</p>
-            </div>
-            <div class="email-info">
-                <img src="/img/email.png" alt="email icon" class="email-icon" />
-                <p>example@email.com</p>
-            </div>
-            <div class="lokasi-info">
-                <img src="/img/location.png" alt="lokasi icon" class="lokasi-icon" />
-                <p>Jl. Jalan, Kota Bandung, Jawa Barat, Indonesia</p>
-            </div>
+<footer class="footer" id="contact-us" data-aos="fade-up" data-aos-duration="1000">
+    <div class="contact-info">
+        <div class="gbrinfo">
+            <img src="{{ asset('../images/fluent-color_library-20.png') }}" alt="Library Icon" />
         </div>
+        <div class="phone-info">
+            <img src="{{ asset('../images/phone.png') }}" alt="Phone Icon" class="phone-icon" />
+            <p>+62 888 999 777</p>
+        </div>
+        <div class="email-info">
+            <img src="{{ asset('../images/email.png') }}" alt="email icon" class="email-icon" />
+            <p>example@email.com</p>
+        </div>
+        <div class="lokasi-info">
+            <img src="{{ asset('../images/location.png') }}" alt="lokasi icon" class="lokasi-icon" />
+            <p>Jl. Jalan, Kota Bandung, Jawa Barat, Indonesia</p>
+        </div>
+    </div>
 
-        <div class="contact-form">
-            <h2>Perpustakaan Online</h2>
-            <p>Any question or remarks? Let us know!</p>
-            <input type="text" placeholder="Enter your name" />
-            <input type="email" placeholder="Enter your email" />
-            <textarea placeholder="Type your message here"></textarea>
-            <button>Submit</button>
-        </div>
-    </footer>
+    <div class="contact-form">
+        <h2>Perpustakaan Online</h2>
+        <p>Any question or remarks? Let us know!</p>
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <!-- Replace with your Access Key -->
+            <input type="hidden" name="access_key" value="6c1f757d-a48d-4694-a6d9-c10caddcc742">
+            
+            <!-- Form Inputs. Each input must have a name="" attribute -->
+            <input type="text" name="name" placeholder="Enter your name" required>
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <textarea name="message" placeholder="Type your message here" required></textarea>
+    
+            <!-- Honeypot Spam Protection -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+    
+            <!-- Submit Button -->
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+
+    </div>
+    
+</footer>
 
     <div class="copyright-info">
         <p>&copy; 2024 Perpustakaan Online. All rights reserved.</p>
