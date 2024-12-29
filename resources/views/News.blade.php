@@ -12,12 +12,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/buku2.css', 'resources/js/wishlistbuku.js'])
 </head>
 
 <body>
-
-    <!-- Navbar -->
     <header>
         <nav class="navbar bg-body-tertiary fixed-top">
             <div class="container-fluid">
@@ -72,41 +69,38 @@
         </nav>
     </header>
 
-    <div class="content" style="padding-top: 80px">
-        <p style="text-align: center; font-size: 40px; font-weight: bold;">Wishlist Buku</p>
-    
-        <!-- Pengecekan jika wishlist kosong -->
-        @if ($booksInWishlist->isEmpty())
-            <p style="text-align: center; font-size: 18px; color: #888;">Belum ada wishlist buku</p>
-        @else
-            <!-- Book Cards -->
-            <div id="book-cards" class="row">
-                @foreach ($booksInWishlist as $book)
-                <div class="col-md-2 mb-4">
-                    <div class="card shadow-sm">
-                        <img src="{{ asset('storage/' . $book->book_image) }}" class="card-img-top" alt="{{ $book->title }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $book->title }}</h5>
-                            <p class="card-text"><strong>Penulis:</strong> {{ $book->author }}</p>
-                            <p class="card-text"><strong>Kategori:</strong> 
-                                @foreach ($book->genres as $genre)
-                                    {{ $genre->name_genre }}{{ !$loop->last ? ', ' : '' }}
-                                @endforeach
-                            </p>
-                            <!-- Tombol Lepas Wishlist -->
-                            <div class="pinjam">
-                                <a href="{{ route('loans.create', ['user_id' => auth()->user()->id, 'book_id' => $book->id]) }}">
-                                    <button type="button">Pinjam Buku</button>
-                                </a>
-                            </div>
-                        </div>
+    <div class="jumbotron text-center bg-primary text-white py-4">
+        <h1>Science News</h1>
+    </div>
+
+    <div class="container-fluid">
+        @if(isset($newsData['articles']) && is_array($newsData['articles']))
+            @foreach ($newsData['articles'] as $news)
+                <div class="row NewsGrid my-4">
+                    <div class="col-md-3">
+                        <img src="{{ $news['urlToImage'] ?? 'placeholder.jpg' }}" alt="News thumbnail" class="rounded img-fluid">
+                    </div>
+                    <div class="col-md-9">
+                        <h2>Title: {{ $news['title'] ?? 'No Title' }}</h2>
+                        <h5>Description: {{ $news['description'] ?? 'No Description' }}</h5>
+                        <p>Content: {{ $news['content'] ?? 'No Content' }}</p>
+                        <h6>Author: {{ $news['author'] ?? 'Unknown' }}</h6>
+                        <h6>Published: {{ $news['publishedAt'] ?? 'No Date' }}</h6>
+                        <a href="{{ $news['url'] ?? '#' }}" class="btn btn-primary" target="_blank">Read More</a>
                     </div>
                 </div>
-                @endforeach
-            </div>
+                <hr>
+            @endforeach
+        @else
+            <p>No news data available.</p>
         @endif
     </div>
-    
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

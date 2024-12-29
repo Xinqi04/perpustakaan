@@ -8,19 +8,21 @@ body {
 
 /* Sidebar Styles */
 .sidebar {
-    width: 200px; /* Ukuran lebih ramping */
-    background-color: #346BD6;
+    width: 250px; /* Sidebar width */
+    background-color: #346BD6; /* Blue color */
     color: white;
-    padding: 20px 15px; /* Padding lebih proporsional */
+    padding: 20px 15px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Elemen di tengah */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sedikit bayangan */
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100%;
 }
 
 .sidebar h2 {
-    margin: 0 0 20px 0; /* Jarak lebih rapi */
-    font-size: 1.7rem; /* Ukuran lebih kecil */
+    margin: 0 0 20px 0;
+    font-size: 1.7rem;
     text-align: center;
 }
 
@@ -45,12 +47,12 @@ body {
     align-items: center;
     gap: 10px;
     border-radius: 5px;
-    width: 100%; /* Agar link penuh */
+    width: 100%;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .sidebar ul li a i {
-    font-size: 16px; /* Ikon lebih kecil */
+    font-size: 16px;
 }
 
 .sidebar ul li a:hover {

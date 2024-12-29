@@ -14,10 +14,18 @@
     <div class="sidebar">
         <h2>Hallo Admin</h2>
         <ul>
-            <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }}"><a href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li class="{{ request()->is('admin/user') ? 'active' : '' }}"><a href="{{ route('admin.dataUser') }}"><i class="fas fa-user"></i> Data User</a></li>
-            <li class="{{ request()->is('admin/buku') ? 'active' : '' }}"><a href="{{ route('admin.dataBuku') }}"><i class="fas fa-book"></i> Data Buku</a></li>
-            <li class="{{ request()->is('admin/transaksi') ? 'active' : '' }}"><a href="{{ route('admin.transaksi') }}"><i class="fas fa-exchange-alt"></i> Transaksi</a></li>
+            <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                <a href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li class="{{ request()->is('admin/user') ? 'active' : '' }}">
+                <a href="{{ route('admin.dataUser') }}"><i class="fas fa-user"></i> Data User</a>
+            </li>
+            <li class="{{ request()->is('admin/buku') ? 'active' : '' }}">
+                <a href="{{ route('admin.dataBuku') }}"><i class="fas fa-book"></i> Data Buku</a>
+            </li>
+            <li class="{{ request()->is('admin/transaksi') ? 'active' : '' }}">
+                <a href="{{ route('admin.loans') }}"><i class="fas fa-exchange-alt"></i> Transaksi</a>
+            </li>
         </ul>
     </div>
 

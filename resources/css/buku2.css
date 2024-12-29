@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     display: flex;
     height: 100vh;
 }
@@ -11,6 +11,46 @@ body {
     align-items: center;
     margin-bottom: 20px;
 }
+
+.pinjam {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.pinjam a {
+    text-decoration: none;
+    width: 100%;
+}
+
+.pinjam button {
+    background-color: #3b82f6; /* Warna biru */
+    color: #ffffff; /* Teks putih */
+    font-size: 14px; /* Ukuran teks */
+    font-weight: 600; /* Ketebalan teks */
+    padding: 10px 20px; /* Ruang dalam */
+    border: none; /* Tanpa border */
+    border-radius: 5px; /* Sudut membulat */
+    cursor: pointer; /* Pointer pada hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+    transition: all 0.3s ease; /* Efek animasi */
+    width: 100%;
+    text-align: center;
+}
+
+/* Hover Effect */
+.pinjam button:hover {
+    background-color: #2563eb; /* Warna biru lebih gelap */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih tegas */
+    transform: translateY(-2px); /* Sedikit naik */
+}
+
+/* Fokus untuk Aksesibilitas */
+.pinjam button:focus {
+    outline: 2px solid #2563eb; /* Outline biru saat fokus */
+    outline-offset: 2px;
+}
+
 
 .search-form input {
     padding: 5px 10px;
@@ -46,7 +86,7 @@ body {
 /* Global Styles */
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     display: flex;
     height: 100vh;
 }
@@ -54,7 +94,7 @@ body {
 /* Sidebar Styles */
 .sidebar {
     width: 200px; /* Ukuran lebih ramping */
-    background-color: #346BD6;
+    background-color: #346bd6;
     color: white;
     padding: 20px 15px; /* Padding lebih proporsional */
     display: flex;
@@ -99,12 +139,12 @@ body {
 }
 
 .sidebar ul li a:hover {
-    background-color: #2A6CBF;
+    background-color: #2a6cbf;
 }
 
 .sidebar ul li.active a {
     background-color: white;
-    color: #346BD6;
+    color: #346bd6;
     font-weight: bold;
 }
 
@@ -116,7 +156,6 @@ body {
     overflow: auto; /* Mencegah konten memotong */
 }
 
-
 .search-bar {
     margin-top: 30px;
     display: flex;
@@ -127,8 +166,8 @@ body {
 
 .search-wrapper {
     display: flex;
-    flex: 1; 
-    max-width: 600px; 
+    flex: 1;
+    max-width: 600px;
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
@@ -142,7 +181,7 @@ body {
 }
 
 .search-btn {
-    background-color: #346BD6;
+    background-color: #346bd6;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -151,7 +190,7 @@ body {
 }
 
 .search-btn:hover {
-    background-color: #2751A4;
+    background-color: #2751a4;
 }
 
 .category-select {
@@ -171,7 +210,8 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.book-table th, .book-table td {
+.book-table th,
+.book-table td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ccc;
@@ -191,10 +231,10 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px; 
-    padding: 6px 9px; 
-    font-size: 13px; 
-    font-weight: 600; 
+    gap: 5px;
+    padding: 6px 9px;
+    font-size: 13px;
+    font-weight: 600;
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -203,29 +243,58 @@ body {
 }
 
 .edit-btn {
-    background-color: #346BD6;
+    background-color: #346bd6;
     width: 70px;
 }
 
 .edit-btn:hover {
-    background-color: #2751A4;
+    background-color: #2751a4;
 }
 
 .delete-btn {
-    background-color: #DC3545;
-    width: 70px; 
+    background-color: #dc3545;
+    width: 70px;
 }
 
 .delete-btn:hover {
-    background-color: #A52733;
+    background-color: #a52733;
 }
 
 .action-btn i {
-    font-size: 14px; 
+    font-size: 14px;
 }
 
 /* Table Column Widths */
 .book-table td:last-child {
     text-align: center;
     width: 160px;
+}
+.card-img-top {
+    align-self: center;
+    width: 200px; /* Atur lebar gambar */
+    height: 300px; /* Atur tinggi gambar */
+    object-fit: cover; /* Menyesuaikan gambar agar tidak terdistorsi */
+}
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Memungkinkan card berpindah baris ketika ruang habis */
+    justify-content: flex-start; /* Menyebarkan card secara merata */
+}
+
+.col-md-2 {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Memastikan card mengambil seluruh tinggi kolom */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan card */
+    border-radius: 10px; /* Sudut melengkung */
 }

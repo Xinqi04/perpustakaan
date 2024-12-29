@@ -57,13 +57,15 @@ class WishlistController extends Controller
     }
 
 
-    /**
+    /** 
      * Remove the specified wishlist item.
      */
-    public function destroy(Wishlist $wishlist)
+    public function destroy($id)
     {
+        // Cari item wishlist berdasarkan ID
+        $wishlist = Wishlist::findOrFail($id);
         $wishlist->delete();
 
-        return redirect()->back()->with('success', 'Book removed from wishlist.');
+        return redirect()->route('wishlist.index')->with('success', 'Book removed from wishlist.');
     }
 }

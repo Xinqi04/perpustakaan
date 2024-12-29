@@ -2,77 +2,116 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  body {
+}
+
+body {
     font-family: Arial, sans-serif;
     height: 100vh;
     display: flex;
-  }
-  
-  .container {
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Memusatkan elemen secara vertikal */
+    width: 80%; /* Tentukan lebar yang sesuai */
+    max-width: 600px; /* Batasi lebar maksimal */
+    margin: 0 auto; /* Memastikan elemen berada di tengah secara horizontal */
+    padding: 20px;
+}
+
+.container {
     display: grid;
     grid-template-columns: 15px 1fr;
     grid-template-rows: auto 1fr;
     height: 100%;
     width: 100%;
-  }
-  
-  header {
+    max-width: 100%;
+}
+
+header {
     grid-column: 1 / -1;
-    background: #4475F2;;
+    background: #4475f2;
     padding: 20px;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  .header-left {
-    display: flex;
-    align-items: center;
-   
 }
-  .header-left h1 {
-    margin-left: 20px;
-  }
-  
-  .header-right {
+
+.header-left {
     display: flex;
     align-items: center;
-  }
+}
 
-  main {
+.header-right {
+    display: flex;
+    align-items: center;
+    margin-top: -15px;
+}
+
+main {
     padding: 20px;
     overflow-y: auto;
     grid-column: 2 / -1;
-  }
-  
-  .profile-header {
+}
+
+/* Tombol Logout */
+.btn-logout {
+    display: inline-block;
+    color: #fff; /* Warna teks putih */
+    text-align: center;
+    padding: 10px 20px; /* Padding untuk ukuran tombol */
+    border: 2px solid #fff; /* Border putih dengan lebar 2px */
+    border-radius: 5px; /* Sudut tombol melengkung */
+    cursor: pointer;
+    font-size: 14px; /* Ukuran font */
+    font-weight: bold; /* Tebal font */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transisi untuk hover */
+}
+
+.btn-logout:hover {
+    background-color: #d62828; /* Warna latar saat hover */
+    transform: scale(1.05); /* Efek zoom saat hover */
+}
+
+.btn-logout:active {
+    transform: scale(0.95); /* Efek mengecil saat tombol diklik */
+}
+
+/* Style tambahan untuk memastikan layout */
+.profile-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
-    }
-  
-  .avatar {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-  }
-  
-  .profile-info {
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* Jarak antar tombol jika ada lebih dari satu */
+}
+
+.profile-info {
     flex-grow: 1;
     margin-left: 20px;
-  }
-  
-  .button-group {
+    text-align: left; /* Menjaga agar teks selalu rata kiri */
+    display: block; /* Memastikan bahwa elemen menjadi blok dan tidak dipengaruhi fleksibelitas */
+    justify-content: left;
+}
+
+.profile-info h2,
+.profile-info p {
+    margin-left: 10px;
+}
+
+.button-group {
     display: flex; /* Letakkan tombol secara horizontal */
     gap: 10px; /* Beri jarak antar tombol */
 }
 
 button {
-    background: #4475F2;
+    background: #4475f2;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -86,34 +125,32 @@ button:hover {
 
 /* Gaya khusus untuk tombol Edit dan Save */
 .btn-edit {
-    background-color: #4475F2;; /* Warna tombol Edit */
+    background-color: #4475f2; /* Warna tombol Edit */
 }
 
 .btn-save {
     background-color: #28a745; /* Warna tombol Save */
 }
 
-  
-  .left, .right {
-    width: 45%;
-    min-width: 280px;
-    margin-right: auto;
+.left,
+.right {
+    width: 100%; /* Pastikan form di left dan right mengambil seluruh lebar */
+    max-width: 500px; /* Membatasi lebar maksimum untuk input form */
+    margin: 0 auto; /* Memastikan elemen terpusat */
 }
 
 .form-container {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap; /* Izinkan elemen membungkus ke bawah saat ruang tidak cukup */
-}
-
-.form-left,
-.form-right {
-    width: 48%;
+    flex-direction: column; /* Pastikan form-nya berada dalam satu kolom */
+    align-items: center; /* Memusatkan form secara horizontal */
+    width: 100%;
+    max-width: 600px; /* Batasi lebar form agar tidak terlalu lebar */
+    padding-top: 20px;
 }
 
 .form-group {
     margin-bottom: 15px;
+    width: 100%;
 }
 
 .form-group label {
@@ -131,31 +168,47 @@ button:hover {
     font-size: 14px;
 }
 
-  .profile input {
+.profile input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
-  }
+}
 
-  .profile select{
+.profile select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
-  }
+}
 
-  .sidebar {
+button {
+    background: #4475f2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Membuat tombol mengambil lebar penuh */
+    max-width: 500px; /* Batasi lebar tombol agar sesuai dengan lebar form */
+    margin-top: 20px; /* Memberikan jarak dari input */
+}
+
+button:hover {
+    background: #005bb5;
+}
+
+.sidebar {
     position: absolute; /* Tetap di kiri tanpa mengganggu layout lainnya */
     top: 0;
     left: 0;
     height: 100%;
     width: 60px;
-    background-color: #4475F2;;
+    background-color: #4475f2;
     width: 60px;
     transition: width 0.3s ease;
     display: flex;

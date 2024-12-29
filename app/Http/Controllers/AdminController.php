@@ -2,16 +2,40 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Loan;
+use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    // Menampilkan halaman dashboard admin
+    // Menampilkan halaman dashboard admi
+
     public function dashboard()
-    {
-        // Menampilkan tampilan untuk dashboard admin
-        return view('admin.dashboard');
-    }
+{
+    $totalUsers = User::count();
+    $totalBooks = Book::count();
+    $totalLoans = Loan::count();
+    
+    // Hitung jumlah peminjaman dengan status 'berhasil'
+    $successfulLoans = Loan::where('status', 'berhasil')->count();
+
+    // Ambil peminjaman yang dilakukan pada hari ini
+    $todayLoans = Loan::whereDate('created_at', now()->toDateString())->get();
+
+    return view('admin.dashboard', compact(
+        'totalUsers', 
+        'totalBooks', 
+        'totalLoans', 
+        'successfulLoans', 
+        'todayLoans'
+    ));
+}
+
+
+
+    
 
     // Menampilkan halaman data user
     public function dataUser(Request $request)
@@ -41,9 +65,40 @@ class AdminController extends Controller
     }
 
     // Menampilkan halaman transaksi
-    public function transaksi()
+
+
+    public function transaksi(Request $request)
     {
-        // Menampilkan tampilan transaksi
-        return view('admin.transaksi');
+        $query = Loan::with(['user', 'book']); // Eager load user and book relationships
+
+        // Apply search filter
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->whereHas('user', function($q) use ($searchTerm) {
+                $q->where('name', 'like', "%{$searchTerm}%");
+            })
+            ->orWhereHas('book', function($q) use ($searchTerm) {
+                $q->where('title', 'like', "%{$searchTerm}%");
+            });
+        }
+
+        // Apply status filter
+        if ($request->has('status')) {
+            $query->where('status', $request->input('status'));
+        }
+
+        $loans = $query->get();
+
+        return view('admin.transaksi', compact('loans'));
+    }
+
+    // Handle updating loan status
+    public function updateStatus(Request $request, $id)
+    {
+        $loan = Loan::findOrFail($id);
+        $loan->status = $request->input('status');
+        $loan->save();
+
+        return redirect()->route('admin.loans')->with('success', 'Status berhasil diupdate');
     }
 }

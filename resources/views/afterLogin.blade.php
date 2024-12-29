@@ -41,21 +41,20 @@
                         </div>
                         <div class="offcanvas-body">
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                <!-- Pinjam Buku -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('dashboard') }}?verified=1">Home</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/profile') }}">Profile</a>
                                 </li>
-                                <!-- Katalog Buku -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/news') }}">News</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/katalogBuku') }}">Katalog Buku</a>
                                 </li>
-                                <!-- Wishlist Buku -->
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('wishlist.index') }}">Wishlist Buku</a>
-                                </li>
-                                <!-- Contact Us -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#contact-us">Contact Us</a>
                                 </li>
                                 <li class="nav-item">
                                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
@@ -82,10 +81,10 @@
                     <p>Embark on a literary journey like never before with our revolutionary library application!
                         Introducing a seamless experience that transcends traditional boundaries, where you can effortlessly
                         search your favorite books.</p>
-                    <div class="search-bar">
+                    {{-- <div class="search-bar">
                         <input placeholder="Cari" type="text" />
                         <button>Browse Now!</button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>
@@ -94,24 +93,25 @@
             <h2 class="text-center mb-4" style="font-size: 2.5rem; padding: 20px;">Katalog Buku</h2> 
             <!-- <h2>Buku</h2> -->
             <div class="buku" id="katalog">
-                <div class="books">
-                    <!-- Repeat book div as necessary -->
-                    @foreach ($books as $book)
-                    <div class="card">
-                        <a href="/books/{{ $book->id }}" style="text-decoration: none; color: inherit;">
-                            <img src="{{ asset('images/Bintang.png') }}" class="card-img-top" alt="{{ $book->title }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $book->title }}</h5>
-                                <p class="card-text">{{ $book->author }}</p>
-                            </div>
-                        </a>
-                    </div>
-                    @endforeach
-                    <div class="show-more">
-                        <a href="#" class="show-more-link">Show More Books</a>
-                    </div>
+    <div class="books">
+        <!-- Repeat book div as necessary -->
+        @foreach ($books as $book)
+        <div class="card">
+            <a href="/books/{{ $book->id }}" style="text-decoration: none; color: inherit;">
+                <img src="{{ asset('images/Bintang.png') }}" class="card-img-top" alt="{{ $book->title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $book->title }}</h5>
+                    <p class="card-text">{{ $book->author }}</p>
                 </div>
-            </div>
+            </a>
+        </div>
+        @endforeach
+        <div class="show-more">
+            <a href="{{ url('/katalogBuku') }}" class="show-more-link">Show More Books</a>
+        </div>
+    </div>
+</div>
+
         </section>
 
         <footer class="footer" id="contact-us" data-aos="fade-up" data-aos-duration="1000">
@@ -153,7 +153,7 @@
     
         async function loadBooks(genre = null) {
             try {
-                const url = genre ? `/books?genre=${genre}` : '/books';
+                const url = genre ? /books?genre=${genre} : '/books';
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('Gagal memuat data buku');
@@ -202,4 +202,4 @@
     <script src="{{ asset('../resources/js/afterlogin.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-</html
+</html>

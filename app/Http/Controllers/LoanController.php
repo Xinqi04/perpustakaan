@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\User;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 
 class LoanController extends Controller
 {
@@ -54,6 +55,19 @@ class LoanController extends Controller
 
         // Kembalikan ke view berhasilPinjam dengan pesan sukses
         return view('berhasilPinjam', ['message' => 'Peminjaman berhasil disimpan!']);
+    }
+
+    public function userLoan()
+    {
+        // Mengambil data pengguna yang sedang login
+        $user = Auth::user();
+
+        // Mengambil transaksi berdasarkan pengguna yang sedang login
+        // Pastikan Anda memiliki relasi 'transactions' di model User
+        $transactions = $user->loan;
+
+        // Mengirim data transaksi ke view
+        return view('riwayat', compact('transactions'));
     }
 
 

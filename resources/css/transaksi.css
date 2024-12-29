@@ -8,14 +8,16 @@ body {
 
 /* Sidebar Styles */
 .sidebar {
-    width: 200px;
-    background-color: #346BD6; /* Warna biru */
+    width: 250px; /* Sidebar width */
+    background-color: #346BD6; /* Blue color */
     color: white;
     padding: 20px 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100%;
 }
 
 .sidebar h2 {
@@ -65,120 +67,128 @@ body {
 
 /* Content Area */
 .content {
-    flex: 1;
+    margin-left: 250px; /* offset to the sidebar */
     padding: 20px;
-    background-color: #f4f4f4;
-    overflow: auto;
+    flex-grow: 1;
 }
 
-/* Search Bar */
+/* Search Bar - full width minus the sidebar */
 .search-bar {
-    margin-top: 30px;
     display: flex;
-    align-items: center;
-    gap: 15px;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
 .search-wrapper {
-    display: flex;
-    flex: 1;
-    max-width: 600px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
+    flex-grow: 1;
+    max-width: calc(100% - 270px); /* Full width minus the sidebar */
 }
 
 .search-input {
-    flex: 1;
-    padding: 8px 12px;
-    border: none;
-    outline: none;
-}
-
-.search-btn {
-    background-color: #346BD6;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-btn:hover {
-    background-color: #2751A4;
-}
-
-.category-select {
-    padding: 8px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    min-width: 150px;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    border-color: #007BFF;
+    outline: none;
 }
 
 /* Table Styling */
 .transaction-table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-top: 20px;
 }
 
-.transaction-table th, .transaction-table td {
+.transaction-table th,
+.transaction-table td {
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
 }
 
 .transaction-table th {
-    background-color: #f4f4f4;
+    background-color: #f2f2f2;
+    font-size: 16px;
+    color: #333;
 }
 
-.transaction-table tr:last-child td {
-    border-bottom: none;
-}
-
-/* Table Column Widths */
-.transaction-table td:last-child {
-    text-align: center;
-}
-
-/* Action Buttons */
-.action-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    padding: 6px 9px;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    color: white;
-    transition: background-color 0.3s ease;
-}
-
-.edit-btn {
-    background-color: #346BD6;
-    width: 70px;
-}
-
-.edit-btn:hover {
-    background-color: #2751A4;
-}
-
-.delete-btn {
-    background-color: #DC3545;
-    width: 70px;
-}
-
-.delete-btn:hover {
-    background-color: #A52733;
-}
-
-.action-btn i {
+.transaction-table td {
     font-size: 14px;
+}
+
+.transaction-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Form inside table for status selection */
+.transaction-table select {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.transaction-table select:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        padding: 15px;
+    }
+
+    .content {
+        margin-left: 210px;
+    }
+
+    .search-wrapper {
+        max-width: 100%;
+    }
+
+    .search-input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .category-select {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-wrapper {
+        max-width: 100%;
+    }
+
+    .category-select {
+        margin-top: 10px;
+    }
 }

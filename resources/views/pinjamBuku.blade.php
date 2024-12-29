@@ -95,6 +95,10 @@
     </footer>
 
     <script>
+        // Mengatur nilai min menjadi tanggal hari ini
+        document.getElementById('tanggalpinjam').min = new Date().toISOString().split('T')[0];
+    </script>
+    <script>
         // Ambil elemen
         const tanggalPinjamInput = document.getElementById('tanggalpinjam');
         const loanDateHiddenInput = document.getElementById('loan_date_hidden');

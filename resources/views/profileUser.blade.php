@@ -24,22 +24,11 @@
             <span class="textSidebar"></span>
         </div>
         <div class="icon" id="groupChat">
-            <span class="material-symbols-outlined">pie_chart</span>
-            <span class="textSidebar"></span>
-        </div>
-        <div class="icon" id="groupChat">
-            <span class="material-symbols-outlined">workspace_premium</span>
-            <span class="textSidebar"></span>
-        </div>
-        <div class="icon" id="groupChat">
-            <span class="material-symbols-outlined">forum</span>
-            <span class="textSidebar"></span>
-        </div>
-        <div class="icon" id="groupChat">
             <span class="material-symbols-outlined">settings</span>
             <span class="textSidebar"></span>
         </div>
     </div>
+
     <div class="container">
         <header>
             <div class="header-left">
@@ -56,69 +45,81 @@
                 <div class="profile-header">
                     <img src="https://via.placeholder.com/100" alt="User" class="avatar">
                     <div class="profile-info">
-                        <h2>{{ Auth::user()->name }}</h2>
-                        <p>{{ Auth::user()->email }}</p>
+                        <h2 id="profileName">{{ Auth::user()->name }}</h2>
+                        <p id="profileEmail">{{ Auth::user()->email }}</p>
                     </div>
-                    <div class="button-group">
-                        <button id="editButton" class="btn-edit">Edit</button>
-                    </div>
+                    {{-- <div class="button-group">
+                        <button class="btn-edit" id="editButton">Edit</button>
+                        <button class="btn-save" id="saveButton" style="display:none;">Save</button>
+                    </div> --}}
                 </div>
                 <div class="form-container">
+                    <div class="left">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" value="{{ Auth::user()->name }}" disabled>
 
-                    <form method="POST" action="{{ route('profile.update') }}">
-                        @csrf
-                        @method('PATCH')
-                    
-                        <div class="left">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" required>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" value="{{ Auth::user()->username }}" disabled>
+                    </div>
+                    <div class="right">
+                        <label for="phonenumber">Phone Number</label>
+                        <input type="text" id="phonenumber" value="{{ Auth::user()->phone_number }}" disabled>
 
-                            <label for="username">Username</label>
-                            <input type="text" id="username" name="username" value="{{ Auth::user()->username }}" required>
-                        </div>
-                    
-                        <div class="right">
-                            <label for="phone_number">Phone Number</label>
-                            <input type="text" id="phone_number" name="phone_number" value="{{ Auth::user()->phone_number }}" required>
-
-                            <label for="address">Address</label>
-                            <input type="text" id="address" name="address" value="{{ Auth::user()->address }}" required>
-                        </div>
-                    
-                        <button type="submit">Save</button>
-                    </form>
-                    
+                        <label for="address">Address</label>
+                        <input type="text" id="address" value="{{ Auth::user()->address }}" disabled>
+                    </div>
                 </div>
+            </div>
         </main>
     </div>
 
+    <script src="profil.js"></script>
     <script>
-        // Get elements
-        const editButton = document.getElementById('editButton');
-        const inputs = document.querySelectorAll('input');
+        document.getElementById('editButton').addEventListener('click', function () {
+        // Enable the form fields for editing
+        document.getElementById('fullname').disabled = false;
+        document.getElementById('username').disabled = false;
+        document.getElementById('phonenumber').disabled = false;
+        document.getElementById('address').disabled = false;
 
-        // Add event listener to the Edit button
-        editButton.addEventListener('click', () => {
-            const isEditing = editButton.textContent.trim() === 'Save';
+        // Show the Save button and hide the Edit button
+        document.getElementById('saveButton').style.display = 'inline-block';
+        document.getElementById('editButton').style.display = 'none';
+    });
 
-            // Toggle button text
-            editButton.textContent = isEditing ? 'Edit' : 'Save';
+    document.getElementById('saveButton').addEventListener('click', function () {
+        // Simulate saving the updated data (You can add an AJAX request here)
+        const fullname = document.getElementById('fullname').value;
+        const username = document.getElementById('username').value;
+        const phone = document.getElementById('phonenumber').value;
+        const address = document.getElementById('address').value;
 
-            // Enable or disable inputs
-            inputs.forEach(input => {
-                input.disabled = isEditing;
+        // Update the profile header with new data
+        document.getElementById('profileName').textContent = fullname;
+        document.getElementById('username').textContent = username; // Assuming the email is updated in username
 
-                // Optionally, add a class to indicate active inputs
-                if (!isEditing) {
-                    input.classList.add('active-input');
-                } else {
-                    input.classList.remove('active-input');
-                }
-            });
-        });
+        // Disable the form fields after saving
+        document.getElementById('fullname').disabled = true;
+        document.getElementById('username').disabled = true;
+        document.getElementById('phonenumber').disabled = true;
+        document.getElementById('address').disabled = true;
+
+        // Hide the Save button and show the Edit button
+        document.getElementById('saveButton').style.display = 'none';
+        document.getElementById('editButton').style.display = 'inline-block';
+
+        // Optional: You can send the updated data to the server using an AJAX request
+        // Example:
+        // fetch('/profile', { method: 'POST', body: JSON.stringify({ fullname, username, phone, address }) });
+    });
 
     </script>
 
+    <script>
+        document.getElementById("groupChat").addEventListener("click", function () {
+            window.location.href = "/riwayat";
+        });
+    </script>
 </body>
 
 </html>

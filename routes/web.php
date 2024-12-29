@@ -6,6 +6,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Book;
 
@@ -18,10 +19,17 @@ Route::get('/dashboard', function () {
     return view('afterLogin', ['books' => $books]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/news', [NewsController::class, 'showNews']);
+
 Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/user', [AdminController::class, 'dataUser'])->name('admin.dataUser');
-    Route::get('/transaksi', [AdminController::class, 'transaksi'])->name('admin.transaksi');
+
+    // Route for viewing loans
+    Route::get('/admin/loans', [AdminController::class, 'transaksi'])->name('admin.loans');
+
+    // Route for updating loan status
+    Route::patch('/admin/loans/{loan}', [AdminController::class, 'updateStatus'])->name('admin.updateStatus');
 
     // Route untuk buku
     Route::prefix('/buku')->group(function () {
@@ -46,10 +54,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/wishlist/{wishlist}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
     Route::get('/pinjambuku', [LoanController::class, 'create'])->name('loans.create');
     Route::post('/pinjambuku', [LoanController::class, 'store'])->name('loans.store');
-    
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/user/transactions', [LoanController::class, 'userLoan'])->name('user.transactions');
 });
 
 require __DIR__.'/auth.php';

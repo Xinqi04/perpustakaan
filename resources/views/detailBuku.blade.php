@@ -42,24 +42,28 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <!-- Katalog Buku -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard') }}?verified=1">Katalog Buku</a>
-                            </li>
-                            <!-- Pinjam Buku -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="/pinjambuku/pinjambuku.html">Pinjam Buku</a>
-                            </li>
-                            <!-- Wishlist Buku -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="/wishlistbuku/wishlistbuku.html">Wishlist Buku</a>
-                            </li>
-                            <!-- Contact Us -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="#contact-us">Contact Us</a>
+                                <a class="nav-link" href="{{ route('dashboard') }}?verified=1">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/landingpage/landingpage.html">Logout</a>
+                                <a class="nav-link" href="{{ url('/profile') }}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/news') }}">News</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/katalogBuku') }}">Katalog Buku</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('wishlist.index') }}">Wishlist Buku</a>
+                            </li>
+                            <li class="nav-item">
+                                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="nav-link" style="background: none; border: none; color: inherit; text-decoration: none;">
+                                        Logout
+                                    </button>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -69,63 +73,33 @@
     </header>
 
     <section class="container" data-aos="fade-in">
-        <div class="cover">
-            <img src="{{ asset('../images/Bumi.png') }}" alt="Bumi" data-aos="fade-right">
+    <img src="{{ asset('../images/Bumi.png') }}" alt="Bumi" data-aos="fade-right">
+    <div class="sinopsis-buku">
+        <div class="judul">
+            <p>{{ Auth::user()->name }}</p>
+            <p>{{ $book->author }}</p>
+            <h2>{{ $book->title }}</h2>
+            <p>Published Year: {{ $book->published_year }}</p>
+            <p>Publisher: {{ $book->publisher }}</p>
+            <form action="{{ route('wishlist.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                <button type="submit" class="wishlist">Add to Wishlist</button>
+            </form>
         </div>
-        <div class="sinopsis-buku">
-            <div class="judul">
-                <p>{{ Auth::user()->name }}</p>
-                <p>{{ $book->author }}</p>
-                <h2>{{ $book->title }}</h2>
-                <p>Published Year: {{ $book->published_year }}</p>
-                <p>Publisher: {{ $book->publisher }}</p>
-                <form action="{{ route('wishlist.store') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="book_id" value="{{ $book->id }}">
-                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                    <button type="submit" class="wishlist">Add to Wishlist</button>
-                </form>
-                
-            </div>
-            <div class="deskripsi">
-                <h3>Sinopsis</h3>
-                <p>{{ $book->synopsis }}</p>
-            </div>
-            {{-- <div class="sinopsis">
-                <h3>Sinopsis</h3>
-                <p>
-                    Tere Liye kembali mengkreasikan imajinasinya kedalam kedalam beberapa rangkaian novel.
-                    Bumi, merupakan rangkaian awal dari kisah sekelompok anak remaja berkemampuan istimewa.
-                    Menceritakan tentang Raib, Ali, dan Seli yang bertualang ke dunia paralel. Mereka yang
-                    istimewa, mampu pergi ke dunia pararel bumi, bertemu dengan klan lain dan berhadapan
-                    dengan Tamus yang memiliki ambisi membebaskan si Tanpa Mahkota dan kemudian, menguasai
-                    bumi. Perkenalkan, Raib, seorang gadis belia berusia lima belas tahun yang tidak biasa.
-                    Dia bisa menghilang. Jangan beritahu siapapun, Itu adalah rahasia terbesar yang tak pernah
-                    ia ceritakan pada siapapun, termasuk kedua orangtuanya. Kehidupannya tetap berjalan normal,
-                    meskipun untuk dirinya sendiri. Tidak jarang Raib menjahili orang tuanya dengan tiba-tiba
-                    menghilang, lalu muncul kembali secara tiba-tiba membuat kaget kedua orangtuanya.
-                    Tidak hanya menyuguhkan cerita fantasi, novel ini juga memberikan pesan moral tentang keluarga,
-                    dan persahabatan. Tere Liye sukses membangun kisah persahabatan antara Raib, Ali, dan Seli terasa
-                    nyata. Hubungan antara Raib dan keluarganya membuat pembaca penasaran sekaligus tersadar akan cara
-                    berkomunikasi dengan orang tua. Tere Liye memberikan banyak kejutan di tiap halaman yang
-                    direpresentasikan oleh Raib, membuat pembaca dapat menikmati cerita yang seolah tidak akan
-                    ada habisnya. Tere Liye berhasil meracik buku ini sebagai bahan baca para pecinta novel sastra
-                    maupun fantasi.
-                </p>
-            </div> --}}
-            <div class="pinjam">
-                {{-- <form action="{{ route('loans.create') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="book_id" value="{{ $book->id }}">
-                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                    <button type="button">Pinjam Buku</button>
-                </form> --}}
-                <a href="{{ route('loans.create', ['user_id' => auth()->user()->id, 'book_id' => $book->id]) }}">
-                    <button type="button">Pinjam Buku</button>
-                </a>
-            </div>
+        <div class="deskripsi">
+            <h3>Sinopsis</h3>
+            <p>{{ $book->synopsis }}</p>
         </div>
-    </section>
+        <div class="pinjam">
+            <a href="{{ route('loans.create', ['user_id' => auth()->user()->id, 'book_id' => $book->id]) }}">
+                <button type="button">Pinjam Buku</button>
+            </a>
+        </div>
+    </div>
+</section>
+
 
     <footer class="footer" id="contact-us">
         <div class="contact-info">
