@@ -74,7 +74,7 @@
     </header>
 
     <section class="container" data-aos="fade-in">
-    <img src="{{ asset('../images/Bumi.png') }}" alt="Bumi" data-aos="fade-right">
+    <img src="{{ asset('storage/' . $book->book_image) }}" alt="Bumi" data-aos="fade-right">
     <div class="sinopsis-buku">
         <div class="judul">
             <p>{{ Auth::user()->name }}</p>

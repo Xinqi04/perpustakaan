@@ -99,7 +99,7 @@
         @foreach ($books as $book)
         <div class="card">
             <a href="/books/{{ $book->id }}" style="text-decoration: none; color: inherit;">
-                <img src="{{ asset('images/Bintang.png') }}" class="card-img-top" alt="{{ $book->title }}">
+                <img src="{{ asset('storage/' . $book->book_image) }}" class="card-img-top" alt="{{ $book->title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $book->title }}</h5>
                     <p class="card-text">{{ $book->author }}</p>
@@ -137,11 +137,23 @@
             <div class="contact-form">
                 <h2>Perpustakaan Online</h2>
                 <p>Any question or remarks? Let us know!</p>
-                <input type="text" placeholder="Enter your name" />
-                <input type="email" placeholder="Enter your email" />
-                <textarea placeholder="Type your message here"></textarea>
-                <button class="submit-button">Submit</button>
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Replace with your Access Key -->
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                    
+                    <!-- Form Inputs. Each input must have a name="" attribute -->
+                    <input type="text" name="name" placeholder="Enter your name" required>
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <textarea name="message" placeholder="Type your message here" required></textarea>
+            
+                    <!-- Honeypot Spam Protection -->
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+            
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-button">Submit</button>
+                </form>
             </div>
+            
         </footer>
 
         <div class="copyright-info">

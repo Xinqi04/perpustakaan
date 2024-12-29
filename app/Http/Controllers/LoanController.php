@@ -59,15 +59,14 @@ class LoanController extends Controller
 
     public function userLoan()
     {
-        // Mengambil data pengguna yang sedang login
+        // Ambil pengguna yang sedang login
         $user = Auth::user();
 
-        // Mengambil transaksi berdasarkan pengguna yang sedang login
-        // Pastikan Anda memiliki relasi 'transactions' di model User
-        $transactions = $user->loan;
+        // Ambil semua data loan yang terkait dengan user
+        $loans = Loan::with('book')->where('user_id', $user->id)->get();
 
-        // Mengirim data transaksi ke view
-        return view('riwayat', compact('transactions'));
+        // Kirim data loans ke view
+        return view('riwayat', compact('loans'));
     }
 
 
