@@ -41,13 +41,13 @@
                         </div>
                         <div class="offcanvas-body">
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                <!-- Katalog Buku -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#katalog">Katalog Buku</a>
-                                </li>
                                 <!-- Pinjam Buku -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/pinjambuku/pinjambuku.html">Pinjam Buku</a>
+                                    <a class="nav-link" href="{{ url('/profile') }}">Profile</a>
+                                </li>
+                                <!-- Katalog Buku -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/katalogBuku') }}">Katalog Buku</a>
                                 </li>
                                 <!-- Wishlist Buku -->
                                 <li class="nav-item">
@@ -91,61 +91,28 @@
         </section>
 
         <section class="book-section" data-aos="fade-up" data-aos-duration="1000">
-            <div class="filter">
-                <select id="genre" class="form-select" onchange="loadBooks(this.value)">
-                </select>
-            </div>
-                <h2>Buku</h2>
-                <div class="buku" id="katalog">
-                    <div class="books">
-                        <p class="text-muted">Memuat katalog buku...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        {{-- <section class="book-section" data-aos="fade-up" data-aos-duration="1000">
-            <div class="filter">
-                <select>
-                    <option value="genre">Genre Buku </option>
-                    <option value="genre">Fiksi Ilmiah </option>
-                    <option value="genre">Fantasi </option>
-                    <option value="genre">Romansa </option>
-                    <option value="genre">Misteri </option>
-                    <option value="genre">Biografi </option>
-                    <option value="genre">Sejarah </option>
-                    <option value="genre">Sains </option>
-                </select>
-                <h2>Buku</h2>
-            </div>
+            <h2 class="text-center mb-4" style="font-size: 2.5rem; padding: 20px;">Katalog Buku</h2> 
             <!-- <h2>Buku</h2> -->
             <div class="buku" id="katalog">
                 <div class="books">
                     <!-- Repeat book div as necessary -->
-                    <div class="book" data-url="/detailbuku/detailbuku.html">
-                        <img alt="Bumi" src="{{ asset('../images/Bumi.png" />
-                        <p>Bumi</p>
-                        <p class="author">Tere Liye</p>
-                        <div class="hover-content">
-                            <button class="wishlist">Add to wishlist</button>
-                            <button class="borrow">Add to pinjam buku</button>
-                        </div>
+                    @foreach ($books as $book)
+                    <div class="card">
+                        <a href="/books/{{ $book->id }}" style="text-decoration: none; color: inherit;">
+                            <img src="{{ asset('images/Bintang.png') }}" class="card-img-top" alt="{{ $book->title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $book->title }}</h5>
+                                <p class="card-text">{{ $book->author }}</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="book">
-                        <img alt="Nebula" src="/img/Nebula.png" />
-                        <p>Nebula</p>
-                        <p class="author">Tere Liye</p>
-                        <div class="hover-content">
-                            <button class="wishlist">Add to wishlist</button>
-                            <button class="borrow">Add to pinjam buku</button>
-                        </div>
-                    </div>
+                    @endforeach
                     <div class="show-more">
                         <a href="#" class="show-more-link">Show More Books</a>
                     </div>
                 </div>
             </div>
-        </section> --}}
+        </section>
 
         <footer class="footer" id="contact-us" data-aos="fade-up" data-aos-duration="1000">
             <div class="contact-info">
@@ -199,21 +166,21 @@
                     return;
                 }
                 books.forEach(book => {
-    const bookCard = document.createElement('div');
-    bookCard.classList.add('col-md-4', 'mb-4');
-    bookCard.innerHTML = `
-        <div class="book">
-            <a href="/books/${book.id}" style="text-decoration: none; color: inherit;">
-                <img src="{{ asset('../images/Bintang.png') }}" class="card-img-top" alt="${book.title}">
-                <div class="card-body">
-                    <h5 class="card-title">${book.title}</h5>
-                    <p class="card-text">${book.author}</p>
-                </div>
-            </a>
-        </div>
-    `;
-    katalogContent.appendChild(bookCard);
-});
+                const bookCard = document.createElement('div');
+                bookCard.classList.add('col-md-2', 'mb-4');
+                bookCard.innerHTML = `
+                    <div class="book">
+                        <a href="/books/${book.id}" style="text-decoration: none; color: inherit;">
+                            <img src="{{ asset('../images/Bintang.png') }}" class="card-img-top" alt="${book.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${book.title}</h5>
+                                <p class="card-text">${book.author}</p>
+                            </div>
+                        </a>
+                    </div>
+                `;
+                katalogContent.appendChild(bookCard);
+            });
 
             } catch (error) {
                 console.error(error);
@@ -224,31 +191,6 @@
         // Initial load of books
         loadBooks();
     </script>
-
-    <script>
-        async function loadGenres() {
-            const response = await fetch('/api/genres');
-            const genres = await response.json();
-
-            const genreSelect = document.querySelector('.filter select');
-            genreSelect.innerHTML = '<option value="">Semua Genre</option>'; // Tambahkan opsi default
-
-            genres.forEach((genre) => {
-                const option = document.createElement('option');
-                option.value = genre.name_genre;
-                option.textContent = genre.name_genre;
-                genreSelect.appendChild(option);
-            });
-        }
-
-        // Muat genre saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', () => {
-            loadGenres();
-        });
-    </script>
-
-    
-
     
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

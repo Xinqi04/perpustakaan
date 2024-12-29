@@ -70,7 +70,7 @@
 
     <section class="container" data-aos="fade-in">
         <div class="cover">
-            <img src="{{ asset('../images/Bintang.png') }}" alt="Bumi" data-aos="fade-right">
+            <img src="{{ asset('../images/Bumi.png') }}" alt="Bumi" data-aos="fade-right">
         </div>
         <div class="sinopsis-buku">
             <div class="judul">
@@ -184,8 +184,8 @@
             });
         @endif
     </script>
-    
 
+<script src="{{ asset('resources/js/detailbuku.js') }}"></script>
 
 </body>
 
