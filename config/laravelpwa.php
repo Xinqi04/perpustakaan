@@ -4,7 +4,7 @@ return [
     'name' => 'Perpustakaan Online',
     'manifest' => [
         'name' => 'Perpustakaan Online',
-        'short_name' => 'Perpustakaan',
+        'short_name' => 'Perpustakaan Online',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
